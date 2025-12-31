@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+python-multipart
+stripe
+google-cloud-aiplatform
+pdfminer.six
+python-docx
+reportlab
+pydantic

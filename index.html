@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Optimizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style> body { font-family: 'Inter', sans-serif; } </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+    <nav class="w-full bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 font-bold text-lg text-indigo-700">
+                <i data-lucide="file-text"></i> CV Alchemist
+            </a>
+            <div class="text-xs bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-bold">v6.0 Ready</div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto text-center pt-16 pb-24 px-6">
+        <div id="hero-header">
+            <h1 class="text-5xl font-extrabold text-slate-900 mb-6">Get Your Resume Past the Robots.</h1>
+            <p class="text-xl text-slate-500 mb-12 max-w-2xl mx-auto">Our tool, powered by Google's Gemini AI, analyzes your resume against Applicant Tracking Systems (ATS) and provides instant feedback to help you land more interviews.</p>
+        </div>
+
+        <div id="how-it-works" class="py-16 text-left">
+            <h2 class="text-3xl font-bold text-center mb-12">How It Works in 3 Simple Steps</h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white p-8 rounded-2xl shadow-md border border-slate-200">
+                    <div class="bg-indigo-100 text-indigo-600 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mb-4">1</div>
+                    <h3 class="font-bold text-lg mb-2">Upload Resume</h3>
+                    <p class="text-slate-600 text-sm">Securely upload your resume. We'll instantly parse it and show you a preview.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-md border border-slate-200">
+                    <div class="bg-indigo-100 text-indigo-600 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mb-4">2</div>
+                    <h3 class="font-bold text-lg mb-2">Get Free Analysis</h3>
+                    <p class="text-slate-600 text-sm">Receive a free, instant report on ATS compatibility, keyword optimization, and formatting errors.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-md border border-slate-200">
+                    <div class="bg-indigo-100 text-indigo-600 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mb-4">3</div>
+                    <h3 class="font-bold text-lg mb-2">Unlock AI Rewrite</h3>
+                    <p class="text-slate-600 text-sm">Get a complete, professional rewrite of your resume, optimized to beat the bots and impress recruiters.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="testimonials" class="py-16 text-left">
+            <h2 class="text-3xl font-bold text-center mb-12">What Our Users Say</h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white p-8 rounded-2xl shadow-md border border-slate-200 flex flex-col justify-between">
+                    <p class="text-slate-600 mb-4">"CV Alchemist really works—it turned my lead into gold! My resume feels so much more professional now."</p>
+                    <p class="font-bold text-slate-800">- Alex P.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-md border border-slate-200 flex flex-col justify-between">
+                    <p class="text-slate-600 mb-4">"The process was incredibly quick and easy. I got my analysis in seconds and the rewrite was ready just after. Highly recommend!"</p>
+                    <p class="font-bold text-slate-800">- Sarah J.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-md border border-slate-200 flex flex-col justify-between">
+                    <p class="text-slate-600 mb-4">"I was quoted $350 for a professional rewrite. CV Alchemist did it for a fraction of the price and the result was outstanding. Landed two interviews within a week!"</p>
+                    <p class="font-bold text-slate-800">- Michael B.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="step-upload" class="bg-white rounded-3xl shadow-xl p-10 border border-slate-200 max-w-2xl mx-auto mb-16">
+            <div class="border-2 border-dashed border-slate-300 rounded-2xl p-12 hover:bg-indigo-50 transition-all relative">
+                <input type="file" id="fileInput" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept=".pdf,.docx">
+                <i data-lucide="upload" class="w-12 h-12 text-indigo-500 mx-auto mb-4"></i>
+                <p class="font-bold text-indigo-700">Click to Upload Resume</p>                
+            </div>
+            <div class="mt-6">
+                <label for="job-title" class="block text-sm font-medium text-slate-700 text-left mb-1">Position You're Applying For</label>
+                <input type="text" id="job-title" placeholder="e.g., Senior Software Engineer" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                <p class="text-xs text-slate-500 text-left mt-2">Provide a job title for a targeted optimization, or leave it blank for a general review.</p>
+            </div>
+            <p id="status-text" class="text-sm font-bold text-indigo-600 mt-6"></p>
+        </div>
+
+        <div id="step-analysis" class="hidden bg-white rounded-3xl shadow-xl p-8 border border-slate-200 text-left max-w-2xl mx-auto mb-16">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Analysis Score</h2>
+                <div class="text-4xl font-black text-indigo-600" id="score-display">--</div>
+            </div>
+            <ul id="feedback-list" class="space-y-3 mb-8 text-slate-700 bg-slate-50 p-6 rounded-xl"></ul>
+            <button onclick="startCheckout()" class="w-full py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 shadow-lg flex justify-center items-center gap-2 text-lg">
+                Get Your AI-Powered Rewrite Now! <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </button>
+            <p class="text-center text-sm text-slate-600 mt-4">Just $29.99. Use code <strong class="text-indigo-600">Beattherobots</strong> at checkout for a special discount!</p>
+            <a href="/" class="mt-4 block text-center text-sm text-slate-500 hover:text-indigo-600">Start Over</a>
+        </div>
+
+        <div id="step-rewrite" class="hidden bg-white rounded-3xl shadow-xl p-10 border border-slate-200 text-left max-w-3xl mx-auto mb-16">
+            <h2 class="text-2xl font-bold text-green-600 mb-4 flex gap-2 items-center"><i data-lucide="check-circle"></i> Complete</h2>
+            <div class="bg-slate-900 text-slate-300 p-6 rounded-xl h-[400px] overflow-y-auto font-mono text-sm mb-6 shadow-inner">
+                <pre id="rewrite-content" class="whitespace-pre-wrap">Waiting for processing...</pre>
+            </div>
+            <div class="flex gap-4 justify-center">
+                <button onclick="downloadFile('pdf')" class="px-6 py-3 bg-indigo-600 text-white font-bold rounded-lg">Download PDF</button>
+                <button onclick="downloadFile('docx')" class="px-6 py-3 bg-white border border-slate-300 font-bold rounded-lg">Download Word</button>
+            </div>
+            <a href="/" class="mt-6 block text-center text-sm text-slate-500 hover:text-indigo-600">Start Over</a>
+            <p class="text-xs text-red-600 text-center mt-2 font-semibold">Warning: Please download your rewrite before starting over, as this will require a new payment.</p>
+        </div>
+        
+        <div id="info-section" class="space-y-16 border-t pt-16 text-left">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="font-bold text-2xl mb-4 text-slate-900">What is an ATS?</h3>
+                    <p class="text-slate-600 leading-relaxed mb-4">Over 90% of large companies use Applicant Tracking Systems (ATS) to filter resumes. These systems scan for specific keywords, formatting, and job titles. If your resume isn't optimized for them, a human recruiter will likely never see it.</p>
+                    <p class="text-slate-600 leading-relaxed">We help you pass the filter.</p>
+                </div>
+                <div class="p-8">
+                    <svg class="h-48 w-auto mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 4H5C3.89543 4 3 4.89543 3 6V18C3 19.1046 3.89543 20 5 20H19C20.1046 20 21 19.1046 21 18V10M15 4V8C15 8.55228 15.4477 9 16 9H20M15 4L20 9M11.5 12.5L14 15L11.5 17.5M8.5 12.5L6 15L8.5 17.5" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M18 4.5L21 7.5" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M18 7.5L21 4.5" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <svg class="h-48 w-auto mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 8V6M12 8V10M12 8H10M12 8H14" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M12 16V14M12 16V18M12 16H10M12 16H14" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M16 12V10M16 12V14M16 12H14M16 12H18" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M8 12V10M8 12V14M8 12H6M8 12H10" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16.5 10.5C16.5 11.3284 15.8284 12 15 12C14.1716 12 13.5 11.3284 13.5 10.5C13.5 9.67157 14.1716 9 15 9C15.8284 9 16.5 9.67157 16.5 10.5Z" fill="#4f46e5"/>
+                        <path d="M10.5 10.5C10.5 11.3284 9.82843 12 9 12C8.17157 12 7.5 11.3284 7.5 10.5C7.5 9.67157 8.17157 9 9 9C9.82843 9 10.5 9.67157 10.5 10.5Z" fill="#4f46e5"/>
+                        <path d="M8 15H16" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="order-1 md:order-2">
+                    <h3 class="font-bold text-2xl mb-4 text-slate-900">How We Fix It with Gemini AI</h3>
+                    <p class="text-slate-600 leading-relaxed mb-4">We use Google's powerful Gemini AI to analyze and rewrite your resume. It identifies missing keywords, rephrases your bullet points for maximum impact, and corrects subtle formatting errors that can cause ATS rejection.</p>
+                    <p class="font-semibold text-slate-700">The result is a professional, polished resume engineered to get you noticed.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="faq-section" class="py-16 text-left">
+            <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+            <div class="space-y-8 max-w-3xl mx-auto">
+                <div class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-lg mb-2">Is my data safe?</h3>
+                    <p class="text-slate-600">Absolutely. Your resume is processed in memory and deleted immediately after the analysis or rewrite is complete. We do not store your personal data or resume content. See our <button onclick="openModal('privacy-modal')" class="text-indigo-600 hover:underline font-medium">Privacy Policy</button> for more details.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-lg mb-2">What file types do you support?</h3>
+                    <p class="text-slate-600">We currently support PDF (.pdf) and Microsoft Word (.docx) files, which are the most common formats for resumes.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-lg mb-2">Do you guarantee I'll get a job?</h3>
+                    <p class="text-slate-600">While our tool significantly improves your resume's chances of passing ATS filters, we cannot guarantee employment. Hiring decisions depend on many factors beyond the resume, including your qualifications and interview performance.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-lg mb-2">Why is there a fee for the rewrite?</h3>
+                    <p class="text-slate-600">The one-time fee covers the cost of using the powerful Google Gemini AI model to perform a high-quality rewrite of your resume. We provide the initial analysis for free so you can see the value before you purchase.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200">
+        <div class="max-w-6xl mx-auto px-6 py-8 text-center text-sm text-slate-500">
+            <p class="font-bold text-lg text-indigo-700 mb-2">CV Alchemist</p>
+            <div>
+                <button onclick="openModal('privacy-modal')" class="hover:text-indigo-600">Privacy Policy</button>
+                <span class="mx-2">&middot;</span>
+                <button onclick="openModal('terms-modal')" class="hover:text-indigo-600">Terms of Service</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-modal" class="hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white max-w-3xl w-full rounded-2xl shadow-xl max-h-[90vh] overflow-y-auto">
+            <div class="p-8 md:p-12">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Privacy Policy</h2>
+                    <button onclick="closeModal('privacy-modal')" class="text-slate-500 hover:text-slate-800">&times;</button>
+                </div>
+                <p class="text-slate-500 mb-8">Last Updated: December 30, 2025</p>
+                <div class="space-y-6 text-slate-700 leading-relaxed text-left">
+                    <h2 class="text-xl font-bold text-slate-900">1. Introduction</h2>
+                    <p>Welcome to CV Alchemist ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, and share your information when you use our resume optimization service.</p>
+        
+                    <h2 class="text-xl font-bold text-slate-900">2. Information We Collect</h2>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Uploaded Documents:</strong> We collect the data contained in the resumes (PDF/DOCX) you upload, including names, contact details, employment history, and education.</li>
+                        <li><strong>Payment Information:</strong> We use Stripe for payments. We do not store your credit card details on our servers.</li>
+                        <li><strong>Usage Data:</strong> We may collect IP addresses and browser information to prevent abuse and improve the service.</li>
+                    </ul>
+        
+                    <h2 class="text-xl font-bold text-slate-900">3. How We Use Your Information</h2>
+                    <p>We use your information solely to:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Analyze your resume against Applicant Tracking System (ATS) standards.</li>
+                        <li>Generate optimized resume content using Artificial Intelligence.</li>
+                        <li>Process payments for premium features.</li>
+                    </ul>
+        
+                    <h2 class="text-xl font-bold text-slate-900">5. Data Retention</h2>
+                    <p>Uploaded resumes are stored temporarily in volatile memory or temporary storage for processing and are automatically deleted shortly after analysis. We do not maintain a permanent database of user resumes.</p>
+        
+                    <h2 class="text-xl font-bold text-slate-900">6. Contact Us</h2>
+                    <p>If you have questions about this policy, please contact us at: <strong>support@cvalchemist.com</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div id="terms-modal" class="hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white max-w-3xl w-full rounded-2xl shadow-xl max-h-[90vh] overflow-y-auto">
+            <div class="p-8 md:p-12">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Terms of Service</h2>
+                    <button onclick="closeModal('terms-modal')" class="text-slate-500 hover:text-slate-800">&times;</button>
+                </div>
+                <p class="text-slate-500 mb-8">Last Updated: December 30, 2025</p>
+                <div class="space-y-6 text-slate-700 leading-relaxed text-left">
+                    <h2 class="text-xl font-bold text-slate-900">1. Acceptance of Terms</h2>
+                    <p>By accessing or using CV Alchemist, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access the service.</p>
+                    <h2 class="text-xl font-bold text-slate-900">2. Description of Service</h2>
+                    <p>CV Alchemist provides AI-powered resume analysis and rewriting services. We grant you a limited, non-exclusive, non-transferable license to use the service for personal resume optimization.</p>
+                    <h2 class="text-xl font-bold text-slate-900">3. User Responsibilities</h2>
+                    <p>You are responsible for the accuracy of the data you upload. You agree not to upload content that is illegal, offensive, or infringes on the intellectual property of others.</p>
+                    <h2 class="text-xl font-bold text-slate-900">4. Payments and Refunds</h2>
+                    <p>Services are billed on a one-time basis via Stripe. Due to the digital nature of the content (immediate AI generation), all sales are final and non-refundable unless required by local law.</p>
+                    <h2 class="text-xl font-bold text-slate-900">5. No Guarantee of Employment</h2>
+                    <p>While we optimize your resume for best practices and ATS compatibility, <strong>CV Alchemist does not guarantee job interviews, offers, or employment.</strong> Hiring decisions are complex and beyond our control.</p>
+                    <h2 class="text-xl font-bold text-slate-900">6. Intellectual Property</h2>
+                    <p>You retain full ownership of your original resume. By uploading it, you grant us a temporary license to process it solely for the purpose of providing the service.</p>
+                    <h2 class="text-xl font-bold text-slate-900">8. Contact</h2>
+                    <p>For support, please contact: <strong>support@cvalchemist.com</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        window.addEventListener('load', async () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('success') === 'true') {
+                document.getElementById('hero-header').style.display = 'none';
+                document.getElementById('step-upload').style.display = 'none';
+                document.getElementById('step-analysis').style.display = 'none';
+                document.getElementById('info-section').style.display = 'none';
+                document.getElementById('how-it-works').style.display = 'none';
+                document.getElementById('step-rewrite').classList.remove('hidden');
+                
+                const rawText = sessionStorage.getItem('cv_raw_text');
+                const jobTitle = sessionStorage.getItem('cv_job_title');
+                const contentBox = document.getElementById('rewrite-content');
+                
+                if(rawText) {
+                    contentBox.innerText = "Processing... (approx 10s)...";
+                    try {
+                        const res = await fetch('/rewrite', { 
+                            method: 'POST', 
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({ text: rawText, job_title: jobTitle })
+                        });
+                        const data = await res.json();
+                        contentBox.innerText = data.optimized_text || "Error";
+                        sessionStorage.setItem('optimized_text', data.optimized_text);
+                    } catch(e) { contentBox.innerText = "Error: " + e; }
+                } else {
+                    contentBox.innerText = "Session expired. Please upload again.";
+                }
+            }
+        });
+
+        document.getElementById('fileInput').addEventListener('change', async function() {
+            if (!this.files[0]) return;
+            const status = document.getElementById('status-text');
+            const jobTitle = document.getElementById('job-title').value;
+            status.innerText = "Scanning...";
+            status.className = "text-indigo-600 mt-6 font-bold animate-pulse";
+            
+            const formData = new FormData();
+            formData.append('file', this.files[0]);
+            formData.append('job_title', jobTitle);
+            
+            try {
+                const res = await fetch('/analyze', { method: 'POST', body: formData });
+                const data = await res.json();
+                
+                sessionStorage.setItem('cv_raw_text', data.raw_text_preview);
+                sessionStorage.setItem('cv_job_title', jobTitle);
+                document.getElementById('step-upload').classList.add('hidden');
+                document.getElementById('hero-header').classList.add('hidden');
+                document.getElementById('how-it-works').classList.add('hidden');
+                document.getElementById('step-analysis').classList.remove('hidden');
+                document.getElementById('score-display').innerText = data.score;
+                
+                const list = document.getElementById('feedback-list');
+                list.innerHTML = "";
+                data.feedback.forEach(i => list.innerHTML += `<li class="flex gap-2 items-start"><i data-lucide="alert-circle" width="18" class="text-amber-500 shrink-0 mt-0.5"></i> ${i}</li>`);
+                lucide.createIcons();
+            } catch(e) { status.innerText = "Error: " + e; status.className = "text-red-500 mt-6 font-bold"; }
+        });
+
+        async function startCheckout() {
+            const res = await fetch('/create-checkout-session', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ origin_url: window.location.origin })
+            });
+            const data = await res.json();
+            window.location.href = data.url;
+        }
+
+        async function downloadFile(type) {
+            const text = sessionStorage.getItem('optimized_text');
+            const res = await fetch('/download-'+type, { 
+                method: 'POST', 
+                headers: {'Content-Type': 'application/json'}, 
+                body: JSON.stringify({ text: text }) 
+            });
+            const blob = await res.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = "Resume."+type;
+            a.click();
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
