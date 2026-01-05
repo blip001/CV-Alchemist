@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+python-multipart
+stripe
+google-cloud-aiplatform
+pdfminer.six
+python-docx
+reportlab
+pydantic
+
+fastapi-mail
+jinja2
+python-dotenv
+google-cloud-secret-manager
