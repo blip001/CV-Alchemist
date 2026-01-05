@@ -1,9 +1,30 @@
-FROM python:3.9-slim
+# Use an official Python runtime as a parent image
+FROM python:3.12-slim
+
+# Set the working directory in the container
 WORKDIR /app
-RUN apt-get update && apt-get install -y gcc libxml2-dev libxslt-dev && rm -rf /var/lib/apt/lists/*
+
+# Copy the requirements file first to leverage Docker cache
 COPY requirements.txt .
+
+# Create a non-root user and switch to it
+RUN addgroup --system app && adduser --system --group app
+
+# Install dependencies as root
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application's source code from your context
 COPY . .
-ENV PYTHONUNBUFFERED=1
-EXPOSE 8080
-CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+
+# Change ownership of the app directory
+RUN chown -R app:app /app
+
+# Add the local user's binary directory to the PATH
+ENV PATH="/home/app/.local/bin:${PATH}"
+
+# Switch to the non-root user
+USER app
+
+# Run main.py when the container launches
+# The port is dynamically set by Cloud Run via the PORT environment variable.
+CMD ["sh", "-c", "exec gunicorn --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT main:app"]
